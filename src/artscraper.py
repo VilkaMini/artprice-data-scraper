@@ -1,4 +1,5 @@
 import os
+import string
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
@@ -8,7 +9,6 @@ class Artscraper:
 
     def __init__(self):
         self.headers = {"User-Agent": "Mozilla/5.0"}
-        self.url = "" #Add apropriate url
         self.cookies = {"lot-currency": "eur"}
         self.url_add = "https://www.artprice.com"
 
@@ -17,19 +17,19 @@ class Artscraper:
         info = self.__get_array()
         array_of_keys = list(info.keys())
 
-        page = self.__get_site()
-        soup = BeautifulSoup(page.content, "html.parser")
-
         for page in range(number_of_pages):
-            print()
+            URL = f"https://www.artprice.com/marketplace?idcurrencyzone=2&p={start_page+page}&sort=sort_dt-desc"
+            page = self.__get_site()
+            soup = BeautifulSoup(page.content, "html.parser")
+
+            # For everypage what to do
 
 
 
 
 
 
-
-    def __get_array() -> dict:
+    def __get_array(self) -> dict:
         """Returns a dictionary containing keys to scraping information.
         
         Returns:
@@ -59,14 +59,14 @@ class Artscraper:
         }
         return iarray
 
-    def __get_site(self) -> requests.Response():
-        """Gets information from Maxima site.
+    def __get_site(self, url: string) -> requests.Response():
+        """Gets information from Artprice site.
 
         Returns:
             page (requests.Response): Object with information from site.
         """
         try:
-            page = requests.get(self.url, headers=self.headers)
+            page = requests.get(url, headers=self.headers, cookies=self.cookies)
         except Exception as e:
             raise Exception("Could not reach the site") from e
         return page
