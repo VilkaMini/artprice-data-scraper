@@ -14,7 +14,15 @@ class Artscraper:
         self.url_add = "https://www.artprice.com"
 
     def scrape(self, start_page: int = 1, number_of_pages: int = 10) -> pd.DataFrame:
-        """Scrapes the artprice website for data"""
+        """Scrapes website.
+
+        Parameters:
+            start_page (int): Start page number.
+            number_of_pages (int): Number of pages to scrape.
+
+        Returns:
+            info (pd.DataFrame): dataframe with scraped information.
+        """
         info = self.__get_full_array()
         array_of_keys = list(info.keys())
 
@@ -42,11 +50,21 @@ class Artscraper:
         return pd.DataFrame(info)
 
     def __append_to_full_array(self, temp_d: dict, info: dict, keys: list):
+        """Appends given temporary array to permanenet main information array.
+        
+        Returns:
+            None
+        """
         for key in keys:
             info[key].append(temp_d[key])
         return None
 
     def __get_table_rows(self, table: BeautifulSoup, temp_d: dict) -> dict:
+        """Inserts information to coresponding temporary dictionary keys.
+        
+        Returns:
+            temp_d: A dictionary with found information.
+        """
         for row in table.find_all("tr"):
             sec_name = (row.find("td", class_="section").text).strip()
             sec_value = (row.find("td", class_="value").text).strip()
@@ -88,6 +106,11 @@ class Artscraper:
         return temp_d
 
     def __get_price(self, soup: BeautifulSoup) -> int:
+        """Finds the item price on the website.
+        
+        Returns:
+            item_price: A price value.
+        """
         try:
             item_price = soup.find("div", class_="price").text
             item_price = int("".join(filter(str.isdigit, item_price)))
@@ -96,6 +119,11 @@ class Artscraper:
         return item_price
 
     def __get_author(self, soup: BeautifulSoup) -> string:
+        """Finds the item author name on the website.
+        
+        Returns:
+            item_artist: An author name.
+        """
         try:
             item_artist = soup.find("strong", class_="artist").text
         except:
@@ -178,13 +206,14 @@ class Artscraper:
         return page
 
     def scrape_to_file(self, start_page: int = 1, number_of_pages: int = 10 ) -> typing.TextIO:
-        """Creates a file with discount information.
+        """Scrapes wbsite and creates a csv file with scraped information.
 
         Parameters:
-            info (dict): information dictionary.
+            start_page (int): Start page number.
+            number_of_pages (int): Number of pages to scrape.
 
         Returns:
-            int (int): status that the file was created successfully.
+            None (csv file).
         """
         df = self.scrape(start_page, number_of_pages)
         df.to_csv("Artprice_data.csv", encoding='utf-16')
