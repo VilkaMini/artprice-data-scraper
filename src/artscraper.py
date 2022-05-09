@@ -65,11 +65,14 @@ class Artscraper:
         Returns:
             temp_d: A dictionary with found information.
         """
+        if table is None:
+            return temp_d
         for row in table.find_all("tr"):
+            print(row)
             try:
                 sec_name = (row.find("td", class_="section").text).strip()
                 sec_value = (row.find("td", class_="value").text).strip()
-            except AttributeError:
+            except:
                 break
             # Checking all possible keys
             if sec_name == "Title":
