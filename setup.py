@@ -13,7 +13,7 @@ setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
-    install_requires=["pandas>=1.1.0", "requests>=2.23.0", "beautifulsoup4>=4.9.0"],
+    install_requires=["pandas>=1.1.0", "requests>=2.23.0", "beautifulsoup4>=4.9.0", "lxml>=4.8.0"],
     extras_require={
         "dev": [
             "pytest>=3.7",
