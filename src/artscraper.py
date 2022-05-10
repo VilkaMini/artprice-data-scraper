@@ -4,9 +4,6 @@ import requests
 from bs4 import BeautifulSoup
 import typing
 import pandas as pd
-from lxml.html import fromstring
-from itertools import cycle
-import traceback
 
 class Artscraper:
 
@@ -207,33 +204,11 @@ class Artscraper:
         Returns:
             page (requests.Response): Object with information from site.
         """
-        proxies = self.__get_proxies()
-        proxy_pool = cycle(proxies)
-        for i in range(1, 11):
-            proxy = next(proxy_pool)
-            try:
-                page = requests.get(url, headers=self.headers, cookies=self.cookies,
-                                    proxies={"http": proxy, "https": proxy})
-                return page
-            except:
-                print("Skipping proxy: " + proxy)
-
-    def __get_proxies(self) -> set:
-        """Gets proxie list from proxies website.
-
-        Returns:
-            proxies (set): Set with 10 proxies from the site
-        """
-        url = 'https://free-proxy-list.net/'
-        response = requests.get(url)
-        parser = fromstring(response.text)
-        proxies = set()
-        for i in parser.xpath('//tbody/tr')[:10]:
-            if i.xpath('.//td[7][contains(text(),"yes")]'):
-                proxy = ":".join([i.xpath('.//td[1]/text()')[0], i.xpath('.//td[2]/text()')[0]])
-                proxies.add(proxy)
-        return proxies
-
+        try:
+            page = requests.get(url, headers=self.headers, cookies=self.cookies)
+            return page
+        except:
+            raise Exception("Could not reach the site")
 
     def scrape_to_file(self, start_page: int = 1, number_of_pages: int = 10 ) -> typing.TextIO:
         """Scrapes wbsite and creates a csv file with scraped information.
