@@ -216,9 +216,7 @@ class Artscraper:
                                     proxies={"http": proxy, "https": proxy})
                 return page
             except:
-                pass
-        if page == None:
-            raise Exception("Could not reach the site")
+                print("Skipping proxy: " + proxy)
 
     def __get_proxies(self) -> set:
         """Gets proxie list from proxies website.
