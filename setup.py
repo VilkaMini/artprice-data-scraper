@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="artScrape",
-    version="0.0.6",
+    version="0.0.7",
     description="Artprice scraper if designed to be used to scrape data from Artprice.com",
     py_modules=["artscraper"],
     package_dir={"": "src"},

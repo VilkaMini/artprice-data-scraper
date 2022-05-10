@@ -217,7 +217,8 @@ class Artscraper:
                 return page
             except:
                 pass
-        raise Exception("Could not reach the site")
+        if page == None:
+            raise Exception("Could not reach the site")
 
     def __get_proxies(self) -> set:
         """Gets proxie list from proxies website.
