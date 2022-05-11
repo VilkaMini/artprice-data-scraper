@@ -58,7 +58,7 @@ scraper_to_file(5, 15)
 
 ## Possible errors:
 
-1. Could not reach the site. -> If the problem persists to not hesitate to contact me and I will try to implement solution.
+1. Could not reach the site. -> Check if you are not blocked on the site manually. Then try to rerun the scraper. If the problem persists to not hesitate to contact me and I will try to implement solution.
 
 ## License
 
