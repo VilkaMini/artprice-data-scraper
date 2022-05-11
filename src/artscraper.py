@@ -74,6 +74,8 @@ class Artscraper:
             except:
                 break
             # Checking all possible keys
+            if sec_name == "Type of Artwork":
+                temp_d["type_of_artwork"] = sec_value
             if sec_name == "Title":
                 temp_d["title"] = sec_value
             elif sec_name == "Year":
@@ -92,7 +94,7 @@ class Artscraper:
                 temp_d["condition"] = sec_value
             elif sec_name == "Observations":
                 temp_d["observations"] = sec_value
-            elif sec_name == "Lot #":
+            elif sec_name == "Lot #" or sec_name == "Ad #":
                 temp_d["id_number"] = sec_value
             elif sec_name == "Seller status":
                 temp_d["seller_status"] = sec_value
