@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import typing
 import pandas as pd
+import time
 
 class Artscraper:
 
@@ -12,6 +13,7 @@ class Artscraper:
         self.cookies = {"lot-currency": "eur",
                         "ipp": "60"}
         self.url_add = "https://www.artprice.com"
+        self.page_counter = 0
 
     def scrape(self, start_page: int = 1, number_of_pages: int = 10) -> pd.DataFrame:
         """Scrapes website.
@@ -29,7 +31,12 @@ class Artscraper:
         # Loop through all pages
         for page in range(number_of_pages):
             URL = f"https://www.artprice.com/marketplace?idcurrencyzone=2&p={start_page+page}&sort=sort_dt-desc"
+            # Every 5 pages the scraper needs to be paused to avoid being blocked from the site
+            if self.page_counter == 5:
+                time.sleep(5)
+                self.page_counter = 0
             page = self.__get_site(URL)
+            self.page_counter += 1
             soup = BeautifulSoup(page.content, "html.parser")
 
             # Loop through all items in page
@@ -208,9 +215,9 @@ class Artscraper:
         """
         try:
             page = requests.get(url, headers=self.headers, cookies=self.cookies)
-            return page
         except:
             raise Exception("Could not reach the site")
+        return page
 
     def scrape_to_file(self, start_page: int = 1, number_of_pages: int = 10 ) -> typing.TextIO:
         """Scrapes wbsite and creates a csv file with scraped information.
