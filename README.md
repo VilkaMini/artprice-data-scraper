@@ -8,6 +8,7 @@ This repository contains Artprice.com scraper. It is designed to scrape data fro
 2. Using scrape_to_file() method to scrape a specified number of pages of art and return it in a csv file.
 
 Scraping returns the following features:
+
     1. Artist name
     2. Title
     3. Price
