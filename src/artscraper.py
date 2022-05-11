@@ -95,8 +95,6 @@ class Artscraper:
                 temp_d["signature"] = sec_value
             elif sec_name == "Size of the artwork":
                 temp_d["size_of_artwork"] = sec_value
-            elif sec_name == "Certificate issued by":
-                temp_d["certificate_issued_by"] = sec_value
             elif sec_name == "Condition":
                 temp_d["condition"] = sec_value
             elif sec_name == "Observations":
@@ -161,7 +159,6 @@ class Artscraper:
             "medium": [],
             "signature": [],
             "size_of_artwork": [],
-            "cerfiticate_issued_by": [],
             "condition": [],
             "observations": [],
             "id_number": [],
@@ -192,7 +189,6 @@ class Artscraper:
             "medium": None,
             "signature": None,
             "size_of_artwork": None,
-            "cerfiticate_issued_by": None,
             "condition": None,
             "observations": None,
             "id_number": None,
