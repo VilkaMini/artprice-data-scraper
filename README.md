@@ -29,6 +29,8 @@ Scraping returns the following features:
     18. Weight
     19. Additional information
     20. Link to the item
+    
+Since the scraper was working poorly I found out that adding 5 seconds pause between scraping batches of 5 pages helps to not get blocked on the the site, but that still could happen and if it happens please go to the website manually and click "I am not a robot" prompt :). After that the scraper should work just fine.
 
 
 ## Instalation:
