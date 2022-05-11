@@ -7,6 +7,29 @@ This repository contains Artprice.com scraper. It is designed to scrape data fro
 1. Using scrape() method to scrape a specified number of pages of art.
 2. Using scrape_to_file() method to scrape a specified number of pages of art and return it in a csv file.
 
+Scraping returns the following features:
+    1. Artist name
+    2. Title
+    3. Price
+    4. Type of Artwork
+    5. Year
+    6. Category
+    7. Medium
+    8. Signature
+    9. Size of artwork
+    10. Condition
+    11. Observations
+    12. Id number
+    13. Seller status
+    14. Country
+    15. Cost of shipping
+    16. Insurance
+    17. Number of parcels
+    18. Weight
+    19. Additional information
+    20. Link to the item
+
+
 ## Instalation:
 
 Run the following line on command line to install the package:
